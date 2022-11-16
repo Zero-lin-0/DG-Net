@@ -2,12 +2,13 @@
 Copyright (C) 2019 NVIDIA Corporation.  All rights reserved.
 Licensed under the CC BY-NC-SA 4.0 license (https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode).
 """
-from utils import get_all_data_loaders, prepare_sub_folder, write_loss, get_config, write_2images, Timer
 import argparse
-from trainer import DGNet_Trainer
-import torch.backends.cudnn as cudnn
-import torch
 import numpy.random as random
+import torch
+import torch.backends.cudnn as cudnn
+from trainer import DGNet_Trainer
+from utils import get_all_data_loaders, prepare_sub_folder, write_loss, get_config, write_2images, Timer
+
 try:
     from itertools import izip as zip
 except ImportError: # will be 3.x series
@@ -16,6 +17,8 @@ import os
 import sys
 import tensorboardX
 import shutil
+
+os.environ['CUDA_VISIBLE_DEVICES'] = '3'
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--config', type=str, default='configs/latest.yaml', help='Path to the config file.')
@@ -31,6 +34,12 @@ gpu_ids = []
 for str_id in str_ids:
     gpu_ids.append(int(str_id))
 num_gpu = len(gpu_ids)
+# print("\n\n\n")
+# print(f"num_gpu: {num_gpu}")
+# print(f"gpu_ids:", end=' ')
+# for gpu_id in gpu_ids:
+#     print(gpu_id, end=" ")
+# print("\n\n\n")
 
 cudnn.benchmark = True
 

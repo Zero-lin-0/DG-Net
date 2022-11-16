@@ -162,12 +162,12 @@ def load_network(network, name):
 def load_config(name):
     config_path = os.path.join('./models',name,'opts.yaml')
     with open(config_path, 'r') as stream:
-        config = yaml.load(stream)
+        config = yaml.safe_load(stream)
     return config
 
 
 class DGNet_Trainer(nn.Module):
-    def __init__(self, hyperparameters, gpu_ids=[0]):
+    def __init__(self, hyperparameters, gpu_ids):
         super(DGNet_Trainer, self).__init__()
         lr_g = hyperparameters['lr_g']
         lr_d = hyperparameters['lr_d']

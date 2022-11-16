@@ -40,7 +40,7 @@ def get_all_data_loaders(conf):
     batch_size = conf['batch_size']
     num_workers = conf['num_workers']
     if 'new_size' in conf:
-        new_size_a= conf['new_size']
+        new_size_a = conf['new_size']
         new_size_b = conf['new_size']
     else:
         new_size_a = conf['new_size_a']
@@ -100,7 +100,7 @@ def get_data_loader_folder(input_folder, batch_size, train, new_size=None,
 
 def get_config(config):
     with open(config, 'r') as stream:
-        return yaml.load(stream)
+        return yaml.load(stream, Loader=yaml.FullLoader)
 
 
 def eformat(f, prec):
